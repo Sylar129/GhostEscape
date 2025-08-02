@@ -1,6 +1,9 @@
 // Copyright (c) 2025 Sylar129. All rights reserved
 
 namespace ghostescape {
+
+class Scene;
+
 class Game {
  public:
   Game();
@@ -18,6 +21,8 @@ class Game {
  private:
   void Update();
   void Render();
+
+  Scene* current_scene_;
 };
 
 }  // namespace ghostescape

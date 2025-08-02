@@ -30,7 +30,10 @@ include_directories(AFTER ${raylib_SOURCE_DIR}/include)
 
 add_executable(${TARGET}
                 src/main.cpp
+                src/scene_main.cpp
                 src/core/game.cpp)
+
+target_include_directories(${TARGET} PRIVATE src/)
 
 target_link_libraries(${TARGET}
                         raylib)
