@@ -1,5 +1,9 @@
 // Copyright (c) 2025 Sylar129. All rights reserved
 
+#pragma once
+
+#include "raylib.h"
+
 namespace ghostescape::core {
 
 class Scene;
@@ -10,6 +14,8 @@ class Game {
   ~Game();
 
   void Run();
+
+  Vector2 GetWindowSize() const;
 
   static Game& Get();
 

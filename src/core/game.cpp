@@ -9,14 +9,17 @@
 
 namespace ghostescape::core {
 
+namespace {
+constexpr int screenWidth = 1280;
+constexpr int screenHeight = 720;
+}  // namespace
+
 Game* Game::s_instance = nullptr;
 
 Game& Game::Get() { return *s_instance; }
 
 Game::Game() {
   assert(s_instance == nullptr);
-  constexpr int screenWidth = 1280;
-  constexpr int screenHeight = 720;
 
   InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
@@ -42,6 +45,8 @@ void Game::Run() {
     Render();
   }
 }
+
+Vector2 Game::GetWindowSize() const { return {screenWidth, screenHeight}; }
 
 void Game::Update() { current_scene_->Update(); }
 

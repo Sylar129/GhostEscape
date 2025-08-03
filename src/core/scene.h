@@ -1,5 +1,7 @@
 // Copyright (c) 2025 Sylar129. All rights reserved
 
+#pragma once
+
 #include <memory>
 #include <vector>
 
@@ -13,7 +15,7 @@ class Scene : public Object {
   virtual ~Scene() = default;
 
  protected:
-  Vector2 camera_position_;
+  Vector2 camera_position_{};
   std::vector<std::unique_ptr<Object>> objects_;
 };
 
