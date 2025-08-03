@@ -2,12 +2,10 @@
 
 #include "scene_main.h"
 
-namespace ghostescape{
-void SceneMain::Init() {}
+namespace ghostescape {
 
 void SceneMain::Update() {}
 
 void SceneMain::Render() {}
 
-void SceneMain::Clean() {}
-}
+}  // namespace ghostescape

@@ -1,6 +1,6 @@
 // Copyright (c) 2025 Sylar129. All rights reserved
 
-namespace ghostescape {
+namespace ghostescape::core {
 
 class Scene;
 
@@ -9,20 +9,17 @@ class Game {
   Game();
   ~Game();
 
-  void Init();
   void Run();
-  void Clean();
 
-  static Game& Get() {
-    static Game game;
-    return game;
-  }
+  static Game& Get();
 
  private:
   void Update();
   void Render();
 
+  static Game* s_instance;
+
   Scene* current_scene_;
 };
 
-}  // namespace ghostescape
+}  // namespace ghostescape::core

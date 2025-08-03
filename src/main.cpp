@@ -3,11 +3,11 @@
 #include "core/game.h"
 
 int main() {
-  ghostescape::Game& game = ghostescape::Game::Get();
+  ghostescape::core::Game* game = new ghostescape::core::Game();
 
-  game.Init();
-  game.Run();
-  game.Clean();
+  game->Run();
+
+  delete game;
 
   return 0;
 }

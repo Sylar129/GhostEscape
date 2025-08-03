@@ -2,16 +2,19 @@
 
 #include "core/game.h"
 
+#include <cassert>
+
 #include "raylib.h"
 #include "scene_main.h"
 
-namespace ghostescape {
+namespace ghostescape::core {
 
-Game::Game() {}
+Game* Game::s_instance = nullptr;
 
-Game ::~Game() {}
+Game& Game::Get() { return *s_instance; }
 
-void Game::Init() {
+Game::Game() {
+  assert(s_instance == nullptr);
   constexpr int screenWidth = 1280;
   constexpr int screenHeight = 720;
 
@@ -20,7 +23,16 @@ void Game::Init() {
   SetTargetFPS(60);
 
   current_scene_ = new SceneMain();
-  current_scene_->Init();
+
+  s_instance = this;
+}
+
+Game ::~Game() {
+  if (current_scene_) {
+    delete current_scene_;
+  }
+
+  CloseWindow();
 }
 
 void Game::Run() {
@@ -29,15 +41,6 @@ void Game::Run() {
 
     Render();
   }
-}
-
-void Game::Clean() {
-  if (current_scene_) {
-    current_scene_->Clean();
-    delete current_scene_;
-  }
-
-  CloseWindow();
 }
 
 void Game::Update() { current_scene_->Update(); }
@@ -52,4 +55,4 @@ void Game::Render() {
   EndDrawing();
 }
 
-}  // namespace ghostescape
+}  // namespace ghostescape::core

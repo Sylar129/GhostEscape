@@ -1,19 +1,20 @@
 // Copyright (c) 2025 Sylar129. All rights reserved
 
+#include <memory>
 #include <vector>
 
 #include "core/object.h"
 #include "raylib.h"
 
-namespace ghostescape {
+namespace ghostescape::core {
 
 class Scene : public Object {
  public:
   virtual ~Scene() = default;
 
- private:
+ protected:
   Vector2 camera_position_;
-  std::vector<Object*> objects_;
+  std::vector<std::unique_ptr<Object>> objects_;
 };
 
-}  // namespace ghostescape
+}  // namespace ghostescape::core

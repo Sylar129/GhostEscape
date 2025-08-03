@@ -3,14 +3,12 @@
 #include "core/scene.h"
 
 namespace ghostescape {
-class SceneMain : public Scene {
+class SceneMain : public core::Scene {
  public:
   virtual ~SceneMain() = default;
 
-  virtual void Init() override;
   virtual void Update() override;
   virtual void Render() override;
-  virtual void Clean() override;
 
  private:
 };
