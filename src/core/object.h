@@ -2,8 +2,6 @@
 
 #pragma once
 
-#include "core/game.h"
-
 namespace ghostescape::core {
 
 class Object {

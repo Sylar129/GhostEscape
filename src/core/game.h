@@ -16,6 +16,7 @@ class Game {
   void Run();
 
   Vector2 GetWindowSize() const;
+  Scene* GetCurrentScene() const { return current_scene_; }
 
   static Game& Get();
 

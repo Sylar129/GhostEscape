@@ -31,7 +31,9 @@ include_directories(AFTER ${raylib_SOURCE_DIR}/include)
 add_executable(${TARGET}
                 src/main.cpp
                 src/scene_main.cpp
-                src/core/game.cpp)
+                src/player.cpp
+                src/core/game.cpp
+                src/core/object_world.cpp)
 
 target_include_directories(${TARGET} PRIVATE src/)
 

@@ -3,17 +3,24 @@
 #include "scene_main.h"
 
 #include "core/game.h"
+#include "player.h"
 #include "raymath.h"
 
 namespace ghostescape {
 
-SceneMain::SceneMain() {}
+SceneMain::SceneMain() { player = new Player(); }
+
+SceneMain::~SceneMain() { delete player; }
 
 void SceneMain::Update() {
   camera_position_ = camera_position_ + Vector2(10, 20) * GetFrameTime();
+  player->Update();
 }
 
-void SceneMain::Render() { RenderBackground(); }
+void SceneMain::Render() {
+  RenderBackground();
+  player->Render();
+}
 
 void SceneMain::RenderBackground() const {
   Vector2 window_size = core::Game::Get().GetWindowSize();

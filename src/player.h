@@ -2,23 +2,19 @@
 
 #pragma once
 
-#include "core/scene.h"
+#include "core/actor.h"
 
 namespace ghostescape {
-
-class Player;
-
-class SceneMain : public core::Scene {
+class Player : public core::Actor {
  public:
-  SceneMain();
-  virtual ~SceneMain() override;
+  Player();
+  virtual ~Player() override;
 
   virtual void Update() override;
   virtual void Render() override;
 
  private:
-  void RenderBackground() const;
-
-  Player* player;
+  void KeyboardControl();
+  void Move();
 };
 }  // namespace ghostescape
