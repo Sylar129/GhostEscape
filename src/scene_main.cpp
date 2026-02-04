@@ -4,6 +4,7 @@
 
 #include "core/game.h"
 #include "player.h"
+#include "raylib.h"
 #include "raymath.h"
 
 namespace ghostescape {
@@ -13,7 +14,7 @@ SceneMain::SceneMain() { player = new Player(); }
 SceneMain::~SceneMain() { delete player; }
 
 void SceneMain::Update() {
-  camera_position_ = camera_position_ + Vector2(10, 20) * GetFrameTime();
+  camera_.target += Vector2(10, 20) * GetFrameTime();
   player->Update();
 }
 
@@ -23,26 +24,31 @@ void SceneMain::Render() {
 }
 
 void SceneMain::RenderBackground() const {
-  Vector2 window_size = core::Game::Get().GetWindowSize();
-  Vector2 world_size = Vector2Scale(window_size, 3);
-  Vector2 left_top = camera_position_ * -1;
-  Vector2 right_bottom = world_size - camera_position_;
+  const Vector2 window_size = core::Game::Get().GetWindowSize();
+  const float grid = 80.0f;
 
-  float grid_size = 80;
+  BeginMode2D(camera_);
 
-  for (float i = left_top.x; i <= right_bottom.x; i += grid_size) {
-    if (i < 0 || i > window_size.x) {
-      continue;
-    }
-    DrawLineV({i, left_top.y}, {i, right_bottom.y}, RED);
+  const float view_width = window_size.x / camera_.zoom;
+  const float view_height = window_size.y / camera_.zoom;
+
+  const float world_left = camera_.target.x;
+  const float world_top = camera_.target.y;
+  const float world_right = world_left + view_width;
+  const float world_bottom = world_top + view_height;
+
+  float start_x = floorf(world_left / grid) * grid;
+  float start_y = floorf(world_top / grid) * grid;
+
+  for (float x = start_x; x <= world_right; x += grid) {
+    DrawLineV({x, world_top}, {x, world_bottom}, RED);
   }
 
-  for (float i = left_top.y; i <= right_bottom.y; i += grid_size) {
-    if (i < 0 || i > window_size.y) {
-      continue;
-    }
-    DrawLineV({left_top.x, i}, {right_bottom.x, i}, RED);
+  for (float y = start_y; y <= world_bottom; y += grid) {
+    DrawLineV({world_left, y}, {world_right, y}, RED);
   }
+
+  EndMode2D();
 
   DrawRectangleLinesEx({0, 0, window_size.x, window_size.y}, 4, GREEN);
 }
